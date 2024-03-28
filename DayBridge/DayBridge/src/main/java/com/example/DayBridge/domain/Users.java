@@ -2,14 +2,18 @@ package com.example.DayBridge.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
+import lombok.*;
 
 @Entity
-@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter @Setter
+@Builder
 public class Users {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -17,5 +21,6 @@ public class Users {
     private String nickName;
     private String userID;
     private String userPW;
+    private UserRole role;
 
 }
