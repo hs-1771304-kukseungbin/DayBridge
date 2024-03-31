@@ -73,7 +73,7 @@
 <br><br><br>
 
 <section>
-    <form name="login" action="index.html" method="post">
+    <form name="signup" action="/signup" method="post">
         <div class="container">
             <div class="inner-container">
                 <b class="name">아이디</b>
@@ -92,7 +92,7 @@
         <div class="container">
             <div class="inner-container">
                 <b class="name">비밀번호 확인</b>
-                <input class="text" type="password" name="userPW" placeholder="비밀번호 입력">
+                <input class="text" type="password" name="pwCheck" placeholder="비밀번호 입력">
             </div>
         </div>
 
@@ -100,7 +100,6 @@
             <div class="inner-container">
                 <b class="name">이메일</b>
                 <input class="text" type="email" name="userEmail" placeholder="Email 입력">
-                <input class="check-button" type="button" name="userEmailcheck" value="중복확인">
             </div>
         </div>
 
@@ -270,6 +269,56 @@
 
     </form>
 </section>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const userIDInput = document.querySelector('input[name="userID"]');
+      const nickNameInput = document.querySelector('input[name="nickName"]');
 
+      const userIDCheckButton = document.querySelector('input[name="userIDcheck"]');
+      const nickNameCheckButton = document.querySelector('input[name="nickNamecheck"]');
+
+      userIDCheckButton.addEventListener('click', function () {
+        const userID = userIDInput.value;
+        if (userID) {
+          fetch('/checkUserID', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userID: userID })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.exist) {
+              alert('이미 사용 중인 아이디입니다.');
+            } else {
+              alert('사용 가능한 아이디입니다.');
+            }
+          });
+        }
+      });
+
+      nickNameCheckButton.addEventListener('click', function () {
+        const nickName = nickNameInput.value;
+        if (nickName) {
+          fetch('/checkNickName', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ nickName: nickName })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.exist) {
+              alert('이미 사용 중인 닉네임입니다.');
+            } else {
+              alert('사용 가능한 닉네임입니다.');
+            }
+          });
+        }
+      });
+    });
+</script>
 </body>
 </html>
