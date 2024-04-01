@@ -18,9 +18,8 @@ public class Users {
 
     private String name;
     private int age;
+    private String email;
     private String nickName;
     private String userID;
     private String userPW;
-    private UserRole role;
-
 }
