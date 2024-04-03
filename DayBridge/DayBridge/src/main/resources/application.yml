@@ -19,5 +19,9 @@ spring:
         show_sql: true
         format_sql: true
 
+
 logging_level:
   org.hibernate.SQL: debug
+
+openai:
+  key: ${}
