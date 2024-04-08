@@ -28,7 +28,7 @@
         async function login(event) {
             event.preventDefault(); // 폼 기본 동작 방지
 
-            const form = new FormData(event.target);
+            const form = new com.example.DayBridge.domain.FormData(event.target);
             const userID = form.get('userID');
             const userPW = form.get('userPW');
             

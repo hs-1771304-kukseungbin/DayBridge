@@ -24,4 +24,6 @@ logging_level:
   org.hibernate.SQL: debug
 
 openai:
-  key: ${}
+  api-key: ${}
+  model: text-davinci-001
+  url:
