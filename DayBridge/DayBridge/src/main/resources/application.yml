@@ -23,5 +23,5 @@ spring:
 logging_level:
   org.hibernate.SQL: debug
 
-openai:
+chatgpt:
   api-key:
