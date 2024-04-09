@@ -1,3 +1,5 @@
+package com.example.DayBridge.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,8 +30,9 @@ public class FormController {
         formDataRepository.save(formData);
 
         // 파이썬 코드에 전송하기 위해 데이터를 전달할 수 있는 형태로 변환
-        String dataToSend = color + "," + furniture + "," + window + "," + width;
+        String dataToSend = color + "색의 톤에, 가구는" + furniture + "가 있고, 창문이" + window + "개 있는," + width+"평의 방";
 
+        // 여기서 chat 호출
 
         // 모델에 데이터 추가(사용자의 생성 기록에 포함 가능)
         model.addAttribute("color", color);

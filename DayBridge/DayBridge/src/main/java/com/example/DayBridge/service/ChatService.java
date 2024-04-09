@@ -2,6 +2,7 @@ package com.example.DayBridge.service;
 
 import io.github.flashvayne.chatgpt.service.ChatgptService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class ChatService {
 
     private final ChatgptService chatgptService;
+
 
     // AiData의 prompt에 질문을 담아서 함수 실행
     public String getChatResponse(String prompt) {

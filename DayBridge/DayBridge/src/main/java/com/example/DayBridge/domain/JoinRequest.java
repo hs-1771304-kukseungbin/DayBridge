@@ -1,9 +1,7 @@
 package com.example.DayBridge.domain;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter
@@ -18,12 +16,11 @@ public class JoinRequest {
     @NotBlank(message = "사용하실 닉네임을 입력해주세요")
     private String nickName;
 
-    public Users toEntity(String encodedPW) {
+    public Users toEntity(String encode) {
         return Users.builder()
                 .userID(this.userID)
-                .userPW(encodedPW)
+                .userPW(encode)
                 .nickName(this.nickName)
-                .role(UserRole.USER)
                 .build();
     }
 }

@@ -1,9 +1,12 @@
 package com.example.DayBridge.service;
 
+import com.example.DayBridge.domain.JoinRequest;
 import com.example.DayBridge.domain.LoginRequest;
 import com.example.DayBridge.repository.UserRepository;
 import com.example.DayBridge.domain.Users;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.buf.UEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +17,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder encoder;
+
 
     //LoginID 중복 체크
     //회원가입 기능 구현시 사용
@@ -29,7 +34,10 @@ public class UserService {
         return userRepository.existByNickName(nickName);
     }
     
-    // 회원가입 추가해야 할 부분
+    // 회원가입
+    public void join(JoinRequest req) {
+        userRepository.save(req.toEntity(encoder.encode(req.getUserPW())));
+    }
     
     
     // 로그인 기능 구현
