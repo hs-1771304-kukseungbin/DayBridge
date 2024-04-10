@@ -1,5 +1,6 @@
 package com.example.DayBridge.controller;
 
+import com.example.DayBridge.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,35 +12,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class FormController {
 
     @Autowired
-    private FormDataRepository formDataRepository; // 데이터베이스 접근을 위한 레포지토리
+    private FormService formService;
 
     @RequestMapping("/form")
     public String showForm() {
-        return "form"; // HTML 폼 페이지의 이름 (예: form.html)
+        return "form"; // HTML 폼 페이지
     }
 
     @PostMapping("/submitForm")
-    public String submitForm(@RequestParam("color") String color, // 작성 폼에 있는 입력 사항들
-                             @RequestParam("furniture") String furniture, // 추후 html과 맞춰서 수정 필요
-                             @RequestParam("window") String window,
-                             @RequestParam("width") String width,
+    public String submitForm(@RequestParam("userNo") Long userNo,
+                             @RequestParam("pointColor") String pointColor,
+                             @RequestParam("windowPosition") String windowPosition,
+                             @RequestParam("windowNum") Integer windowNum,
+                             @RequestParam("essentialFurniture") String essentialFurniture,
+                             @RequestParam("roomSize") String roomSize,
                              Model model) {
-        // 여기서 데이터 처리 및 ChatGPT에게 전달하는 작업 수행
-        // 데이터를 데이터베이스에 저장
-        FormData formData = new FormData(color, furniture, window, width);
-        formDataRepository.save(formData);
 
-        // 파이썬 코드에 전송하기 위해 데이터를 전달할 수 있는 형태로 변환
-        String dataToSend = color + "색의 톤에, 가구는" + furniture + "가 있고, 창문이" + window + "개 있는," + width+"평의 방";
+        formService.saveFormData(userNo, pointColor, windowPosition, windowNum, essentialFurniture, roomSize);
+        String dataToSend = pointColor + "색의 톤에, 가구는" + essentialFurniture + "가 있고, 창문이" + windowNum + "개 있는," + roomSize+"평의 방";
 
-        // 여기서 chat 호출
+        // chatgpt
 
-        // 모델에 데이터 추가(사용자의 생성 기록에 포함 가능)
-        model.addAttribute("color", color);
-        model.addAttribute("furniture", furniture);
-        model.addAttribute("window", window);
-        model.addAttribute("width", width);
+        model.addAttribute("dataToSend", dataToSend);
 
-        return "result"; // 결과를 표시할 페이지의 이름 (예: result.html)
+        return "result"; // 결과 표시할 페이지
     }
 }
