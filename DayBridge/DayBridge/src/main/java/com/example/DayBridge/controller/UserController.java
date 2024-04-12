@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/security-login")
+@RequestMapping("/DayBridge")
 public class UserController {
 
     private final UserService userService;
@@ -35,7 +35,7 @@ public class UserController {
     }
 
     // 회원가입
-    @PostMapping("/join")
+    @PostMapping("/signUp")
     public String join(@Valid @ModelAttribute JoinRequest joinRequest, BindingResult bindingResult) {
         // id 중복 체크
         if(userService.checkUserIDDuplicate(joinRequest.getUserID())) {
@@ -53,14 +53,15 @@ public class UserController {
         }
 
         if(bindingResult.hasErrors()) {
-            return "join";
+            return "signUp";
         }
 
         userService.join(joinRequest);
-        return "redirect:/security-login";
+        return "redirect:/DayBridge";
     }
 
     // 로그인
+    @GetMapping("/login")
     public String loginPage(Model model) {
         model.addAttribute("loginRequest", new LoginRequest());
         return "login";
