@@ -24,14 +24,14 @@ public class UserService {
     //회원가입 기능 구현시 사용
     //중복일 경우 true를 리턴하도록 함
     public boolean checkUserIDDuplicate(String userID){
-        return userRepository.existByUserID(userID);
+        return userRepository.existsByUserID(userID);
     }
     
     //nickName 중복 체크
     //이 부분도 회원가입 기능 구현시 사용
     //중복일 경우 true 리턴
     public boolean checkNickNameDuplicate(String nickName){
-        return userRepository.existByNickName(nickName);
+        return userRepository.existsByNickName(nickName);
     }
     
     // 회원가입

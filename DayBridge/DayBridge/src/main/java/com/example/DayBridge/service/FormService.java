@@ -1,6 +1,6 @@
 package com.example.DayBridge.service;
 
-import com.example.DayBridge.model.FormData;
+import com.example.DayBridge.domain.FormData;
 import com.example.DayBridge.repository.FormDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
