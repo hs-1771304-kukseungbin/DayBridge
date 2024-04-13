@@ -34,6 +34,12 @@ public class UserController {
         return "home";
     }
 
+    @GetMapping("/signUp")
+    public String goToSignUpPage(Model model) {
+        model.addAttribute("joinRequest", new JoinRequest());
+        return "signUp";
+    }
+
     // 회원가입
     @PostMapping("/signUp")
     public String join(@Valid @ModelAttribute JoinRequest joinRequest, BindingResult bindingResult) {
@@ -57,7 +63,7 @@ public class UserController {
         }
 
         userService.join(joinRequest);
-        return "redirect:/DayBridge";
+        return "redirect:/DayBridge/";
     }
 
     // 로그인
