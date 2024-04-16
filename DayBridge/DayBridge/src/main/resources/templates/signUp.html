@@ -118,29 +118,6 @@
             </div>
         </div>
 
-        <div class="container">
-            <div class="inner-container">
-                <b class="name">생년월일</b>
-                <input type="date"
-                       id="date"
-                       name="birthday"
-                       max="2024-12-31"
-                       min="1900-01-01">
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="inner-container">
-                <b class="name">성별</b>
-                <div class="gender-container">
-                    <label class="gender-label" for="man">남자</label>
-                    <input type="radio" name="gender" id="man">&nbsp;&nbsp;&nbsp;
-                    <label class="gender-label" for="woman">여자</label>
-                    <input type="radio" name="gender" id="woman">
-                </div>
-            </div>
-        </div>
-
         <div>
             <button class="sign_up" type="submit">회원가입</button>
         </div>
@@ -184,14 +161,19 @@
       userIDCheckButton.addEventListener('click', function () {
         const userID = userIDInput.value;
         if (userID) {
-          fetch('/checkUserID', {
+          fetch('/checkUserIDDuplicate', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({ userID: userID })
           })
-          .then(response => response.json())
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('서버에서 응답이 정상적으로 받아오지 않았습니다.');
+              }
+              return response.text(); // 서버 응답을 텍스트로 읽어들임
+          })
           .then(data => {
             if (data.exist) {
               alert('이미 사용 중인 아이디입니다.');
@@ -205,14 +187,19 @@
       nickNameCheckButton.addEventListener('click', function () {
         const nickName = nickNameInput.value;
         if (nickName) {
-          fetch('/checkNickName', {
+          fetch('/checkNickNameDuplicate', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({ nickName: nickName })
           })
-          .then(response => response.json())
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('서버에서 응답이 정상적으로 받아오지 않았습니다.');
+              }
+              return response.text(); // 서버 응답을 텍스트로 읽어들임
+          })
           .then(data => {
             if (data.exist) {
               alert('이미 사용 중인 닉네임입니다.');
