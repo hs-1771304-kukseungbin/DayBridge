@@ -1,69 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-<style>
-	.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  .inner-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 450px;
-  }
-  .text {
-    background-color: aliceblue;
-    border: 1px solid black;
-    border-radius: 5px;
-    height: 30px;
-    flex: 1;
-  }
-  .name {
-    font-size: 80%;
-    width: 100px;
-    text-align: left;
-    margin-right: 10px;
-  }
-  .check-button {
-    height: 30px;
-    margin-left: 10px;
-  }
-  .sign_in {
-    width: 200px;
-    height: 30px;
-    background: greenyellow;
-    border: 1px solid green;
-    border-radius: 5px;
-    transition: 0.25s;
-  }
-  .sign_up:active {
-    background: green;
-  }
-  div {
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  h1 {
-    text-align: center;
-  }
-</style>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .sign_in {
+            width: 200px;
+            height: 30px;
+            background: greenyellow;
+            border: 1px solid green;
+            border-radius: 5px;
+            transition: 0.25s;
+        }
+        .sign_in:hover{
+            background: green;
+        }
+        div {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .label {
+            padding: 10px;
+        }
+    </style>
 </head>
+
 <body>
     <h1>로그인</h1>
     <form id="loginForm" onsubmit="login(event)">
         <div class="container">
-            <label for="userID">아이디: </label>
+            <label class="label" for="userID">아이디: </label>
             <input type="text" id="userID" name="userID" required>
 					</div>
         </div>
         <div class="container">
-            <label for="userPW">비밀번호: </label>
+            <label class="label" for="userPW">비밀번호: </label>
             <input type="password" id="userPW" name="userPW" required>
         </div>
         <div class="container">
@@ -75,7 +56,7 @@
         async function login(event) {
             event.preventDefault(); // 폼 기본 동작 방지
 
-            const form = new com.example.DayBridge.domain.FormData(event.target);
+            const form = new com.example.DayBridge.FormData(event.target);
             const userID = form.get('userID');
             const userPW = form.get('userPW');
             
