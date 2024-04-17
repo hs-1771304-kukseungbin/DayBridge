@@ -17,7 +17,6 @@ public class Users {
     private Long id;
 
     private String name;
-    private int age;
     private String email;
     private String nickName;
     private String userID;

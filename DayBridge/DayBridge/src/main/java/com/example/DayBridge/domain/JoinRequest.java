@@ -16,11 +16,19 @@ public class JoinRequest {
     @NotBlank(message = "사용하실 닉네임을 입력해주세요")
     private String nickName;
 
+    @NotBlank(message = "이메일을 입력해주세요")
+    private String Email;
+
+    @NotBlank(message = "이름을 입력해주세요")
+    private String Name;
+
     public Users toEntity(String encode) {
         return Users.builder()
                 .userID(this.userID)
                 .userPW(encode)
                 .nickName(this.nickName)
+                .email(this.Email)
+                .name(this.Name)
                 .build();
     }
 }

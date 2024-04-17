@@ -73,11 +73,11 @@
 <br><br><br>
 
 <section>
-    <form name="signup" action="/signup" method="post">
+    <form th:action="@{/DayBridge/signUp}" th:object="${joinRequest}" method="post">
         <div class="container">
             <div class="inner-container">
                 <b class="name">아이디</b>
-                <input class="text" type="text" name="userID" placeholder="아이디 입력">
+                <input class="text" type="text" th:field="*{userID}" name="userID" placeholder="아이디 입력">
                 <input class="check-button" type="button" name="userIDcheck" value="중복확인">
             </div>
         </div>
@@ -85,21 +85,21 @@
         <div class="container">
             <div class="inner-container">
                 <b class="name">비밀번호</b>
-                <input class="text" type="password" name="userPW" placeholder="비밀번호 입력">
+                <input class="text" type="password" th:field="*{userPW}" name="userPW" placeholder="비밀번호 입력">
             </div>
         </div>
 
         <div class="container">
             <div class="inner-container">
                 <b class="name">비밀번호 확인</b>
-                <input class="text" type="password" name="pwCheck" placeholder="비밀번호 입력">
+                <input class="text" type="password" th:field="*{pwCheck}"name="pwCheck" placeholder="비밀번호 입력">
             </div>
         </div>
 
         <div class="container">
             <div class="inner-container">
                 <b class="name">이메일</b>
-                <input class="text" type="email" name="userEmail" placeholder="Email 입력">
+                <input class="text" type="email" th:field="*{email}" name="userEmail" placeholder="Email 입력">
             </div>
         </div>
 
@@ -107,14 +107,14 @@
             <div class="inner-container">
                 <b class="name">닉네임</b>
                 <input class="text" type="text" name="nickName" placeholder="닉네임 입력">
-                <input class="check-button" type="button" name="nickNamecheck" value="중복확인">
+                <input class="check-button" type="button" th:field="*{nickName}" name="nickNamecheck" value="중복확인">
             </div>
         </div>
 
         <div class="container">
             <div class="inner-container">
                 <b class="name">이름</b>
-                <input class="text" type="text" name="userName" placeholder="이름 입력">
+                <input class="text" type="text" th:field="*{name}" name="userName" placeholder="이름 입력">
             </div>
         </div>
 
