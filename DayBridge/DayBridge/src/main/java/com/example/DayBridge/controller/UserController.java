@@ -6,6 +6,7 @@ import com.example.DayBridge.domain.Users;
 import com.example.DayBridge.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/DayBridge")
 public class UserController {
 
+    @Autowired
     private final UserService userService;
 
     @GetMapping("/")
@@ -78,5 +80,18 @@ public class UserController {
     public String loginPage(Model model) {
         model.addAttribute("loginRequest", new LoginRequest());
         return "login";
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginSuccess(@RequestBody LoginRequest loginRequest) {
+        Users user = userService.login(loginRequest);
+
+        if (user == null) {
+            // 로그인 실패 시
+            return ResponseEntity.badRequest().body("아이디 혹은 비밀번호를 다시 확인하세요.");
+        } else {
+            // 로그인 성공 시
+            return ResponseEntity.ok().body("로그인 성공");
+        }
     }
 }

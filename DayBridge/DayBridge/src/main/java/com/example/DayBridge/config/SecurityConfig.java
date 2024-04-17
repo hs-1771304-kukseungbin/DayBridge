@@ -31,7 +31,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(requests -> requests.requestMatchers("/DayBridge/","/DayBridge/login","/DayBridge/signUp","/DayBridge/userID/{userID}/exists","/DayBridge/nickName/{nickName}/exists").permitAll()
-                .requestMatchers("/form", "/result").authenticated() // 이부분 추가 혹은 수정 필요
                 .anyRequest().authenticated() //이부분에서 어차피 처리되는거 아닌지?
         ).formLogin(form -> form.loginPage("/DayBridge/login").defaultSuccessUrl("/DayBridge/",true).permitAll()
         ).logout(logout -> logout.permitAll());
