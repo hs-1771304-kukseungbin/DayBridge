@@ -4,8 +4,8 @@ spring:
     #    url: jdbc:mysql://127.0.0.1:3306/daybridge
     #    username: root
     #    password: 1234
-    #  thymeleaf:
-    #    cache: false
+    thymeleaf:
+      cache: false
     url: jdbc:h2:tcp://localhost/~/daybridge
     username: sa
     password: 1234

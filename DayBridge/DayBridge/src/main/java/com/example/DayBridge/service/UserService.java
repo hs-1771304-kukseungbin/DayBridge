@@ -54,9 +54,12 @@ public class UserService {
         Users users = optionalUsers.get();
 
         // pw 확인
-        if(!users.getUserPW().equals(lr.getUserPW())) {
+        if(!encoder.matches(lr.getUserPW(), users.getUserPW())) {
             return null;
         }
+//        if(!users.getUserPW().equals(lr.getUserPW())) {
+//            return null;
+//        }
         return users;
     }
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
+import java.util.Base64;
 
 @Controller
 public class FormController {
@@ -43,8 +44,11 @@ public class FormController {
 
         // 여기서 리턴 받는건 이미지 파일
         byte[] image = formService.getImageResponse(dataToSend, ImageSize.LARGE, ImageFormat.BASE64);
+        String b64_image = Base64.getEncoder().encodeToString(image);
         // 이부분 수정됨
-        model.addAttribute("image", image);
+//        <img src="data:image/jpg;base64,${image}" /> 이렇게 화면에 그냥 넣을 수 있음
+//        visionAPI에는 jpg로 넣어줘야함
+        model.addAttribute("image", b64_image);
 
         return "result"; // 결과 표시할 페이지
     }
