@@ -6,15 +6,13 @@ import com.example.DayBridge.domain.Users;
 import com.example.DayBridge.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -66,6 +64,15 @@ public class UserController {
         return "redirect:/DayBridge/";
     }
 
+    @GetMapping("/userID/{userID}/exists")
+    public ResponseEntity<Boolean> checkIdDuplicate(@PathVariable String userID) {
+        return ResponseEntity.ok(userService.checkUserIDDuplicate(userID));
+    }
+
+    @GetMapping("/nickName/{nickName}/exists")
+    public ResponseEntity<Boolean> checkNickNameDuplicate(@PathVariable String nickName) {
+        return ResponseEntity.ok(userService.checkNickNameDuplicate(nickName));
+    }
     // 로그인
     @GetMapping("/login")
     public String loginPage(Model model) {

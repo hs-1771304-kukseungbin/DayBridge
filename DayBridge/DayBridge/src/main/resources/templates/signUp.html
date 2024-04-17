@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <title>DayBridge</title>
@@ -66,6 +66,73 @@
           width: 100px;
         }
     </style>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 필수 입력 필드 검증
+    const signUpButton = document.querySelector('.sign_up');
+    signUpButton.addEventListener('click', function(event) {
+        const requiredFields = document.querySelectorAll('.text');
+        let isEmpty = false;
+        requiredFields.forEach(function(field) {
+            if (!field.value.trim()) {
+                alert(field.name + '는 필수 입력입니다.');
+                isEmpty = true;
+                field.focus();
+                event.preventDefault(); // 폼 제출 방지
+                return;
+            }
+        });
+        if (isEmpty) {
+            return; // 필수 항목이 비어있으면 나머지 로직 실행하지 않음
+        }
+    });
+
+    // ID 중복 확인
+    document.querySelector('input[name="userIDcheck"]').addEventListener('click', function() {
+        const userID = document.querySelector('input[name="userID"]').value;
+        if (!userID) {
+            alert('아이디를 입력해주세요.');
+            return;
+        }
+        fetch(`/DayBridge/userID/${userID}/exists`)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    alert('이미 존재하는 아이디입니다.');
+                } else {
+                    alert('사용 가능한 아이디입니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('중복 검사 중 오류가 발생했습니다.');
+            });
+    });
+
+    // 닉네임 중복 확인
+    document.querySelector('input[name="nickNamecheck"]').addEventListener('click', function() {
+        const nickName = document.querySelector('input[name="nickName"]').value;
+        if (!nickName) {
+            alert('닉네임을 입력해주세요.');
+            return;
+        }
+        fetch(`/DayBridge/nickName/${nickName}/exists`)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    alert('이미 존재하는 닉네임입니다.');
+                } else {
+                    alert('사용 가능한 닉네임입니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('중복 검사 중 오류가 발생했습니다.');
+            });
+    });
+});
+</script>
+
 </head>
 <body>
 <br>
