@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Room Styler</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+            font-size: 4em;
+        }
+        h2 {
+            text-align: center;
+            font-size: 2em;
+        }
+        .gallery-container {
+            width: 100%;
+            overflow: hidden;
+            margin: 0 auto; /* 가운데 정렬을 위한 스타일 */
+            max-width: 900px; /* 컨테이너 너비 제한 */
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            transition: transform 0.5s ease-in-out;
+        }
+        .gallery-row {
+            display: flex;
+            width: 900px;
+            justify-content: space-between;
+        }
+        .gallery-square {
+            width: 300px;
+            height: 200px;
+            border: 2px solid black;
+            margin: 10px;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+        .gallery-square img {
+            width: 100%;
+            height: auto;
+        }
+        .arrow-container {
+            display: flex;
+            justify-content: space-between; /* 애로우를 양 옆에 배치 */
+            align-items: center; /* 애로우 세로 중앙 정렬 */
+            margin-top: 20px;
+            width: 100%; /* 컨테이너 전체 너비 사용 */
+        }
+        .arrow {
+            cursor: pointer;
+            font-size: 2em;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+<br><br><br><br><br>
+<h1>RoomStyler</h1>
+<h2>내 갤러리</h2>
+<div class="gallery-container">
+    <section class="gallery" id="gallery">
+        <div class="gallery-row">
+            <div class="gallery-square" id="galleryContainer1">
+                <!--<img src="your-image.jpg">-->
+            </div>
+            <div class="gallery-square" id="galleryContainer2">
+                <!--<img src="your-image.jpg">-->
+            </div>
+            <div class="gallery-square" id="galleryContainer3">
+                <!--<img src="your-image.jpg">-->
+            </div>
+        </div>
+        <div class="gallery-row">
+            <div class="gallery-square" id="galleryContainer4">
+                <!--<img src="your-image.jpg">-->
+            </div>
+            <div class="gallery-square" id="galleryContainer5">
+                <!--<img src="your-image.jpg">-->
+            </div>
+            <div class="gallery-square" id="galleryContainer6">
+                <!--<img src="your-image.jpg">-->
+            </div>
+        </div>
+    </section>
+    <div class="arrow-container">
+        <div></div>
+        <div class="arrow" id="leftArrow">&#10094;</div>
+        <div class="arrow" id="rightArrow">&#10095;</div>
+        <div></div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let gallerySquares = document.querySelectorAll('.gallery-square');
+
+        gallerySquares.forEach((square, index) => {
+            square.addEventListener('click', () => {
+                let image = square.querySelector('img');
+                if (image) {
+                    let imageUrl = image.src;
+
+                    // 선택된 이미지 정보를 sessionStorage에 저장
+                    sessionStorage.setItem('selectedImage', imageUrl);
+
+                    // galleryDetails.html 페이지로 이동
+                    window.location.href = 'galleryDetails.html';
+                }
+            });
+        });
+
+        let gallery = document.getElementById('gallery');
+        let leftArrow = document.getElementById('leftArrow');
+        let rightArrow = document.getElementById('rightArrow');
+        let currentIndex = 0;
+        let maxIndex = 1;
+
+        leftArrow.addEventListener('click', () => {
+            if (currentIndex > 0 && isGalleryFull(currentIndex - 1)) {
+                currentIndex--;
+                gallery.style.transform = `translateX(-${currentIndex * 900}px)`;
+            }
+        });
+
+        rightArrow.addEventListener('click', () => {
+            if (currentIndex < maxIndex && isGalleryFull(currentIndex + 1)) {
+                currentIndex++;
+                gallery.style.transform = `translateX(-${currentIndex * 900}px)`;
+            }
+        });
+
+// 갤러리 컨테이너가 모두 채워져 있는지 확인하는 함수(사진 다 안 채워져 있으면 애로우 눌러도 옆으로 안넘어감)
+        function isGalleryFull(index) {
+            let galleryRow = gallery.querySelector(`#galleryContainer${index + 1}`).parentNode;
+            let gallerySquares = galleryRow.querySelectorAll('.gallery-square');
+
+            for (let square of gallerySquares) {
+                if (!square.querySelector('img')) {
+                    return false;
+                }
+            }
+            return true;
+        }
+</script>
+</body>
+</html>
