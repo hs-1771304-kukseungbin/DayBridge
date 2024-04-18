@@ -19,12 +19,12 @@ public class FormController {
     @Autowired
     private FormService formService;
     
-    @RequestMapping("/form")
+    @RequestMapping("/DayBridge/form")
     public String showForm() {
         return "form"; // HTML 폼 페이지
     }
 
-    @PostMapping("/submitForm")
+    @PostMapping("/DayBridge/submitForm")
     public String submitForm(@RequestParam("userNo") Long userNo,
                              @RequestParam("pointColor") String pointColor,
                              @RequestParam("windowPosition") String windowPosition,
