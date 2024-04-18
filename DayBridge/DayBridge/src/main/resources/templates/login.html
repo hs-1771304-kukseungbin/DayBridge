@@ -56,10 +56,10 @@
         async function login(event) {
             event.preventDefault(); // 폼 기본 동작 방지
 
-            const form = new com.example.DayBridge.FormData(event.target);
+            const form = new FormData(event.target);
             const userID = form.get('userID');
             const userPW = form.get('userPW');
-            
+
             // 서버로 전송될 데이터
             const data = {
                 userID: userID,
@@ -67,7 +67,7 @@
             };
 
             try {
-                const response = await fetch('/login', {
+                const response = await fetch('/DayBridge/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
