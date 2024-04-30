@@ -30,7 +30,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(requests -> requests.requestMatchers("/DayBridge/","/DayBridge/login","/DayBridge/signUp","/DayBridge/userID/{userID}/exists","/DayBridge/nickName/{nickName}/exists","/DayBridge/form").permitAll()
+        http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(requests -> requests.requestMatchers("/DayBridge/","/DayBridge/login","/DayBridge/signUp","/DayBridge/userID/{userID}/exists","/DayBridge/nickName/{nickName}/exists","/DayBridge/form","/DayBridge/result").permitAll()
                 .anyRequest().authenticated()
         ).formLogin(form -> form.loginPage("/DayBridge/login").defaultSuccessUrl("/DayBridge/",true).permitAll()
         ).logout(logout -> logout.permitAll());

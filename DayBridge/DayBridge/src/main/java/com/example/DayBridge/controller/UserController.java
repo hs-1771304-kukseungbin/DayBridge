@@ -23,6 +23,7 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
+
     @GetMapping("/")
     public String home(Model model, Authentication auth) {
         if(auth != null) {
@@ -95,3 +96,74 @@ public class UserController {
         }
     }
 }
+
+//package com.example.DayBridge.controller;
+//
+//        import com.example.DayBridge.domain.JoinRequest;
+//        import com.example.DayBridge.domain.LoginRequest;
+//        import com.example.DayBridge.domain.Users;
+//        import com.example.DayBridge.service.UserService;
+//        import jakarta.validation.Valid;
+//        import lombok.RequiredArgsConstructor;
+//        import org.springframework.http.ResponseEntity;
+//        import org.springframework.security.core.Authentication;
+//        import org.springframework.stereotype.Controller;
+//        import org.springframework.ui.Model;
+//        import org.springframework.validation.BindingResult;
+//        import org.springframework.validation.FieldError;
+//        import org.springframework.web.bind.annotation.*;
+//
+//@Controller
+//@RequiredArgsConstructor
+//@RequestMapping("/DayBridge")
+//public class UserController {
+//
+//    private final UserService userService;
+//
+//    @GetMapping("/")
+//    public String home(Model model, Authentication auth) {
+//        if (auth != null) {
+//            Users loginUser = userService.getLoginUserByID(auth.getName());
+//            if (loginUser != null) {
+//                model.addAttribute("nickname", loginUser.getNickName());
+//            }
+//        }
+//        return "home";
+//    }
+//
+//    @GetMapping("/signUp")
+//    public String goToSignUpPage(Model model) {
+//        model.addAttribute("joinRequest", new JoinRequest());
+//        return "signUp";
+//    }
+//
+//    // 회원가입
+//    @PostMapping("/signUp")
+//    public String join(@Valid @ModelAttribute JoinRequest joinRequest, BindingResult bindingResult) {
+//        // 중복 체크 및 비밀번호 검증 로직은 동일하게 유지
+//
+//        if (bindingResult.hasErrors()) {
+//            return "signUp";
+//        }
+//
+//        userService.join(joinRequest);
+//        return "redirect:/DayBridge/";
+//    }
+//
+//    @GetMapping("/userID/{userID}/exists")
+//    public ResponseEntity<Boolean> checkIdDuplicate(@PathVariable String userID) {
+//        return ResponseEntity.ok(userService.checkUserIDDuplicate(userID));
+//    }
+//
+//    @GetMapping("/nickName/{nickName}/exists")
+//    public ResponseEntity<Boolean> checkNickNameDuplicate(@PathVariable String nickName) {
+//        return ResponseEntity.ok(userService.checkNickNameDuplicate(nickName));
+//    }
+//
+//    // 로그인 페이지 렌더링
+//    @GetMapping("/login")
+//    public String loginPage(Model model) {
+//        model.addAttribute("loginRequest", new LoginRequest());
+//        return "login";
+//    }
+//}

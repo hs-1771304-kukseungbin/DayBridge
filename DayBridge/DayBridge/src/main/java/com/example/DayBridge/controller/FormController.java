@@ -34,7 +34,7 @@ public class FormController {
                              Model model) throws IOException {
 
         formService.saveFormData(userNo, pointColor, windowPosition, windowNum, essentialFurniture, roomSize);
-        String dataToSend = pointColor + "색의 톤에, 가구는" + essentialFurniture + "가 있고, 창문이" + windowNum + "개 있는," + roomSize+"평의 방";
+        String dataToSend = pointColor + "색의 톤에, 가구는" + essentialFurniture + "가 있고, 창문이" + windowNum + "개 있는," + roomSize+"크기의 방";
 
         // chatgpt
 //        public void testImageList(){
@@ -44,12 +44,18 @@ public class FormController {
 
         // 여기서 리턴 받는건 이미지 파일
         byte[] image = formService.getImageResponse(dataToSend, ImageSize.LARGE, ImageFormat.BASE64);
+        // API
+
+        // 이미지 파일을 화면에 바로 넣을수 있게 인코딩
         String b64_image = Base64.getEncoder().encodeToString(image);
         // 이부분 수정됨
 //        <img src="data:image/jpg;base64,${image}" /> 이렇게 화면에 그냥 넣을 수 있음
-//        visionAPI에는 jpg로 넣어줘야함
+//        visionAPI에는 png로 넣어줘야함
         model.addAttribute("image", b64_image);
 
         return "result"; // 결과 표시할 페이지
     }
+    
+    //결과물을 받을 페이지
+
 }
