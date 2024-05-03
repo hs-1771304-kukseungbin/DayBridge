@@ -34,7 +34,11 @@ public class FormController {
                              Model model) throws IOException {
 
         formService.saveFormData(userNo, pointColor, windowPosition, windowNum, essentialFurniture, roomSize);
-        String dataToSend = pointColor + "색의 톤에, 가구는" + essentialFurniture + "가 있고, 창문이" + windowNum + "개 있는," + roomSize+"크기의 방";
+
+        String dataToSend =
+                "A photograph resembling a real-life room, featuring " + essentialFurniture + " furniture and "
+                        + windowNum + " windows positioned " + windowPosition + ", all in a " + pointColor + " tone. " +
+                        "The room size is " + roomSize + " square meters. This photograph must show the whole room.";
 
         // chatgpt
 //        public void testImageList(){
