@@ -8,11 +8,13 @@ import io.github.flashvayne.chatgpt.service.ChatgptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
@@ -55,4 +57,17 @@ public class FormService {
 
         return pngImage;
     }
+
+    public void saveImage(byte[] imageBytes, String formatName) throws IOException {
+        // 현재 시간을 기준으로 파일 이름 생성
+        String fileName = "image_" + System.currentTimeMillis() + "." + formatName;
+        // 경로 확인 필요
+        File path = new File(ResourceUtils.getFile("classpath:").getAbsolutePath() + "/image");
+        if (!path.exists()) {
+            path.mkdirs(); // 폴더가 없다면 생성
+        }
+        File outputFile = new File(path, fileName);
+        ImageIO.write(ImageIO.read(new ByteArrayInputStream(imageBytes)), formatName, outputFile);
+    }
+    
 }
