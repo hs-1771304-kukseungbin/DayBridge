@@ -10,7 +10,8 @@
 - 개발 언어 : Java, JavaScript XML
 - 관련 기술 : OpenAI DALL-E, Google Cloud Vision
 
-![image](https://github.com/hs-1771304-kukseungbin/DayBridge/assets/86177125/3bc916e5-0c08-45b7-88b1-ad5fe5cbbadd)
+![KakaoTalk_20240517_123556753](https://github.com/hs-1771304-kukseungbin/DayBridge/assets/86177125/681347d5-e3a7-4ba1-a177-5721037791f8)
+
 
 ### 작품 소개
 ![image](https://github.com/hs-1771304-kukseungbin/DayBridge/assets/86177125/9c56f411-2c60-4bee-9ea4-445aba95bd55)
