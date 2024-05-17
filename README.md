@@ -1,5 +1,8 @@
 # DayBridge
 
+### DayBridge_Frontend : https://github.com/hs-1771304-kukseungbin/DayBridge_Frontend
+### DayBridge_Backend : https://github.com/hs-1771304-kukseungbin/DayBridge_Backend
+
 ### 프로젝트 명 : Room Styler
 
 ### 작품 개요
